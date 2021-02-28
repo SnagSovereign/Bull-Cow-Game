@@ -13,7 +13,6 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     FFileHelper::LoadFileToStringArray(Words, *WordListPath);
     //Filter the Words Array to only contain valid words
     Words = GetValidWords(Words);
-
     SetupGame();
 }
 
@@ -71,9 +70,9 @@ void UBullCowCartridge::ProcessGuess(const FString& Guess)
 void UBullCowCartridge::SetupGame()
 {
     bGameOver = false;
-    HiddenWord = TEXT("pickle");
+    HiddenWord = Words[FMath::RandRange(0, Words.Num() - 1)];
     Lives = HiddenWord.Len();
-
+  
     // welcome player
     PrintLine(TEXT("Hello there! Welcome to Bulls and Cows!"));
     PrintLine(TEXT("Guess the %i letter word."), HiddenWord.Len());
